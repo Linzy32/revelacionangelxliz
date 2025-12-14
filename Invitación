@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Revelación de Género</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --card-width:90%;
+  --card-max:420px;
+}
+html,body{
+  height:100%;
+  margin:0;
+  padding:0;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+body{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: linear-gradient(180deg, #ffe1f0 0%, #e8f4ff 100%);
+  font-family:'Poppins',sans-serif;
+  min-height:100vh;
+  overflow:hidden;
+  padding:20px;
+  box-sizing:border-box;
+}
+
+/* SOBRE */
+.envelope{
+  position:relative;
+  width:280px;
+  max-width:90vw;
+  height:190px;
+  background:#fff;
+  border:5px solid;
+  border-image: linear-gradient(45deg, pink, #ffd94d, #bfe7ff) 1;
+  border-radius:12px;
+  cursor:pointer;
+  transition: transform .9s ease, opacity .8s ease;
+  animation: glowColors 3s infinite alternate;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  user-select:none;
+}
+@keyframes glowColors{
+  0% { box-shadow: 0 0 6px rgba(255,182,193,0.45),0 0 8px rgba(255,217,77,0.35),0 0 10px rgba(135,206,235,0.35);}
+  50% { box-shadow: 0 0 14px rgba(255,182,193,0.7),0 0 18px rgba(255,217,77,0.55),0 0 20px rgba(135,206,235,0.6);}
+  100% { box-shadow: 0 0 6px rgba(255,182,193,0.45),0 0 8px rgba(255,217,77,0.35),0 0 10px rgba(135,206,235,0.35);}
+}
+.envelope-text{
+  position:absolute;
+  top:10px;
+  width:100%;
+  text-align:center;
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(16px,3vw,22px);
+  color:#333;
+  pointer-events:none;
+}
+.flap{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:52%;
+  background:#fff;
+  border-bottom:5px solid;
+  border-image: linear-gradient(45deg, pink, #ffd94d, #bfe7ff) 1;
+  clip-path: polygon(0 0,50% 100%,100% 0);
+  transform-origin:top;
+  transition: transform .9s ease;
+  z-index:3;
+}
+.seal{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:56px;
+  height:56px;
+  background:#ffd94d;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.12);
+  transition: transform .12s ease, opacity .6s ease;
+  z-index:5;
+}
+.seal:active{
+  transform:translate(-50%,-50%) scale(.96);
+}
+
+/* INVITACIÓN */
+.invitation{
+  display:none;
+  width:var(--card-width);
+  max-width:var(--card-max);
+  background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.92) 100%);
+  border-radius:14px;
+  padding:65px 28px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 10px 40px rgba(10,20,30,0.08);
+}
+.invitation-card{text-align:center;color:#333;font-family:'Dancing Script',cursive;font-size:clamp(16px,3.2vw,20px);position:relative;}
+
+/* Marco emojis: fila única arriba y abajo */
+.emoji-border{
+  position:absolute;
+  left:0;
+  right:0;
+  color:#f5d742;
+  font-size:16px;
+  text-align:center;
+  letter-spacing:3px;
+  pointer-events:none;
+  z-index:1;
+  animation:borderGlow 4s infinite alternate;
+}
+.emoji-top{top:30px;}
+.emoji-bottom{bottom:30px;}
+@keyframes borderGlow{
+  0%{filter:brightness(1);text-shadow:0 0 4px rgba(245,215,66,0.6);}
+  50%{filter:brightness(1.4);text-shadow:0 0 10px rgba(245,215,66,0.9);}
+  100%{filter:brightness(1);text-shadow:0 0 4px rgba(245,215,66,0.6);}
+}
+
+/* Ositos de fondo */
+.teddy{position:absolute;font-size:56px;opacity:0.24;z-index:0;user-select:none;transform-origin:center;}
+.t1{left:6%;top:6%;color:#d9b38c;animation: floatA 11s ease-in-out infinite;}
+.t2{left:42%;top:30%;color:#cba86b;opacity:0.16;transform:translateX(-50%);animation: floatB 13s ease-in-out infinite;}
+.t3{right:6%;bottom:10%;color:#e6c899;animation: floatC 15s ease-in-out infinite;}
+@keyframes floatA{0%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-12px) rotate(8deg);}100%{transform:translateY(0) rotate(0deg);}}
+@keyframes floatB{0%{transform:translateY(0) rotate(0deg) translateX(-50%);}50%{transform:translateY(14px) rotate(-10deg) translateX(-50%);}100%{transform:translateY(0) rotate(0deg) translateX(-50%);}}
+@keyframes floatC{0%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-9px) rotate(7deg);}100%{transform:translateY(0) rotate(0deg);}}
+
+.invitation .content{position:relative;z-index:2;text-align:center;}
+.invitation h2{font-family:'Dancing Script',cursive;margin:0 0 10px 0;font-size:clamp(22px,5vw,28px);color:#2d2d2d;min-height:48px;}
+.invitation p{margin:8px 0;color:#333;line-height:1.45;font-size:clamp(14px,3vw,18px);}
+.signature{font-size:0.9rem;margin-top:6px;opacity:0.95;}
+
+/* Texto presiona aquí con flecha */
+.press-hint{display:block;margin-top:12px;font-size:0.86rem;font-weight:600;color:#000;}
+.press-hint::after{content:" ⬇️"; display:inline-block; margin-left:4px;}
+
+/* Botón con destellos dorados */
+.cta{
+  display:inline-block;
+  margin-top:8px;
+  background: linear-gradient(145deg,#e7e7e7,#d9d9d9);
+  border-radius:28px;
+  padding:10px 22px;
+  color:#000;
+  text-decoration:none;
+  font-weight:700;
+  border:1px solid rgba(0,0,0,0.12);
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  position:relative;
+  overflow:hidden;
+}
+.cta::before{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background:radial-gradient(circle, rgba(245,215,66,0.4) 0%, rgba(245,215,66,0) 60%);
+  animation:sparkle 2.5s infinite linear;
+  pointer-events:none;
+  opacity:0.6;
+  border-radius:50%;
+}
+@keyframes sparkle{0%{transform:rotate(0deg) scale(1);}50%{transform:rotate(180deg) scale(1.1);}100%{transform:rotate(360deg) scale(1);}}
+
+.emoji{position:fixed;font-size:22px;z-index:60;pointer-events:none;}
+</style>
+</head>
+
+<body>
+<div class="envelope" id="envelope">
+  <div class="envelope-text">👣 ¿Niña o Niño? 👣</div>
+  <div class="flap" id="flap"></div>
+  <div class="seal" id="seal">💛</div>
+</div>
+
+<div class="invitation" id="invitation">
+  <div class="emoji-border emoji-top">🐣✨🧸✨🐣✨🐣✨🧸✨🐣</div>
+  <div class="emoji-border emoji-bottom">🐣✨🧸✨🐣✨🐣✨🧸✨🐣</div>
+
+  <div class="teddy t1">❤️</div>
+  <div class="teddy t2">🍼</div>
+  <div class="teddy t3">🧸</div>
+
+  <div class="content">
+    <h2 id="type-title"></h2>
+    <p id="type-line1"></p>
+    <p id="type-line2"></p>
+    <p id="type-line3" class="signature"></p>
+
+    <div id="pressBlock" style="margin-top:6px;">
+      <div class="press-hint" id="pressHint">Presiona aquí para:</div>
+      <a id="confirmBtn" class="cta"
+         href="https://wa.me/529996091578?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20la%20invitaci%C3%B3n%20%F0%9F%92%96"
+         target="_blank">Confirmar asistencia</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const seal=document.getElementById('seal');
+const flap=document.getElementById('flap');
+const envelope=document.getElementById('envelope');
+const invitation=document.getElementById('invitation');
+const confirmBtn=document.getElementById('confirmBtn');
+const titleEl=document.getElementById('type-title');
+const line1El=document.getElementById('type-line1');
+const line2El=document.getElementById('type-line2');
+const line3El=document.getElementById('type-line3');
+
+const titleText="🩷 ¡Holaa! 🩵";
+const line1Text="Estás invitado a un momento muy especial en nuestras vidas: la revelación de género de nuestro bebé💗.";
+const line2Text="Con mucha emoción y amor, queremos compartir contigo este día tan bonito, lleno de risas, sorpresas y mucha ternura. Te esperamos con alegría el 27 de diciembre a las 3:00 p.m. para descubrir juntos si nuestro pequeño retoño será niña o niño 🌱💖.";
+const line3Text="La ubicación 📍:  67 b diag #778 x 117c diag y 108 almendros lll ciudad caucel. Tu presencia hará de este día algo aún más inolvidable🫂. — Atte: Angel y Lizbeth ❤️‍🩹";
+
+function makeFloatingEmoji(chr,durationRange=[4,7]){
+  const el=document.createElement('div');
+  el.className='emoji';
+  el.innerText=chr;
+  el.style.fontSize=(16+Math.random()*22)+'px';
+  el.style.left=(6+Math.random()*88)+'vw';
+  el.style.top=window.innerHeight+'px';
+  el.style.opacity=1;
+  const dur=(durationRange[0]+Math.random()*(durationRange[1]-durationRange[0])).toFixed(2);
+  el.style.transition=`transform ${dur}s linear, opacity ${dur}s linear`;
+  document.body.appendChild(el);
+  requestAnimationFrame(()=>{el.style.transform=`translateY(-${window.innerHeight+220}px) rotate(${(Math.random()*60-30)}deg)`;el.style.opacity=0;});
+  setTimeout(()=>el.remove(), dur*1000+120);
+}
+
+function showBottles(){for(let i=0;i<22;i++) setTimeout(()=>makeFloatingEmoji('🍼✨💖',[4,7]),i*70);}
+function showHearts(){for(let i=0;i<28;i++) setTimeout(()=>makeFloatingEmoji('💖',[3,6]),i*45);}
+
+async function typeText(el,text,speed=36){el.textContent='';for(let i=0;i<text.length;i++){el.textContent+=text[i];await new Promise(r=>setTimeout(r,speed));}}
+async function typeAll(){await typeText(titleEl,titleText,40);await new Promise(r=>setTimeout(r,300));await typeText(line1El,line1Text,36);await new Promise(r=>setTimeout(r,220));await typeText(line2El,line2Text,36);await new Promise(r=>setTimeout(r,220));await typeText(line3El,line3Text,36);}
+
+seal.addEventListener('click',()=>{
+  if(seal.dataset.opened==='true')return;
+  seal.dataset.opened='true';
+  flap.style.transform='rotateX(180deg)';
+  showBottles();
+  setTimeout(()=>{envelope.style.opacity='0';seal.style.opacity='0';},2000);
+  setTimeout(()=>{
+    envelope.style.display='none';
+    invitation.style.display='block';
+    setTimeout(()=>{typeAll();},260);
+  },2500);
+});
+
+confirmBtn.addEventListener('click',()=>showHearts());
+</script>
+</body>
+</html>
